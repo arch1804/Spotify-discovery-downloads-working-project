@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +29,11 @@
             text-align: center;
             margin-bottom: 30px;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             text-align: center;
             margin-bottom: 40px;
             font-size: 1.1em;
@@ -41,13 +42,13 @@
         .track-list {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
 
         .track-item {
             display: grid;
-            grid-template-columns: 1fr 2fr 2fr 1fr 150px;
+            grid-template-columns: 60px 2fr 2fr 150px;
             align-items: center;
             padding: 20px 30px;
             border-bottom: 1px solid #f0f0f0;
@@ -74,13 +75,20 @@
             font-size: 1.1em;
         }
 
-        .track-artist {
-            color: #666;
+        .track-name .emerging-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5af19, #f12711);
+            color: white;
+            font-size: 0.7em;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-weight: 700;
         }
 
-        .track-duration {
-            color: #999;
-            text-align: center;
+        .track-artist {
+            color: #666;
         }
 
         .download-btn {
@@ -126,28 +134,34 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>🎵 Discovery Downloads</h1>
-        <p class="subtitle">Reliability Simulation Platform - Day 1</p>
-        
+        <p class="subtitle">Reliability Simulation Platform - Day 2</p>
+
         <div class="track-list">
             {% if tracks %}
-                {% for track in tracks %}
-                <div class="track-item">
-                    <div class="track-id">#{{ track.id }}</div>
-                    <div class="track-name">{{ track.name }}</div>
-                    <div class="track-artist">{{ track.artist }}</div>
-                    <div class="track-duration">{{ track.duration }}</div>
-                    <button class="download-btn">Download</button>
+            {% for track in tracks %}
+            <div class="track-item">
+                <div class="track-id">#{{ track.id }}</div>
+                <div class="track-name">
+                    {{ track.name }}
+                    {% if track.is_emerging %}
+                    <span class="emerging-badge">Emerging 🌟</span>
+                    {% endif %}
                 </div>
-                {% endfor %}
+                <div class="track-artist">{{ track.artist }}</div>
+                <button class="download-btn">Download</button>
+            </div>
+            {% endfor %}
             {% else %}
-                <div class="empty-state">
-                    <p>No tracks available</p>
-                </div>
+            <div class="empty-state">
+                <p>No tracks available</p>
+            </div>
             {% endif %}
         </div>
     </div>
 </body>
+
 </html>
